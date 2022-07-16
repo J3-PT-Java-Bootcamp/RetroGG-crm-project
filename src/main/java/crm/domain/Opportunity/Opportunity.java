@@ -1,5 +1,7 @@
 package crm.domain.Opportunity;
 
+import crm.domain.Lead.Lead;
+
 import java.util.UUID;
 
 public class Opportunity {
@@ -18,7 +20,8 @@ public class Opportunity {
         this.status = status;
     }
 
-    public static Opportunity createFromLead(Contact decisionMaker, int quantity, ProductType productType) {
+    public static Opportunity createFromLead(Lead lead, int quantity, ProductType productType) {
+        var decisionMaker = Contact.fromLead(lead);
         return new Opportunity(UUID.randomUUID(), decisionMaker, quantity, productType, OpportunityStatus.OPEN);
     }
 
