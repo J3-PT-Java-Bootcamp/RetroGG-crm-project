@@ -24,7 +24,7 @@ public class Company {
         this.city = city;
         this.country = country;
         this.contacts = contacts;
-        this.oportunities = oportunities;
+        this.opportunities = oportunities;
     }
 
     public static Company create(Industry industry, int employeeCount, String city, String country) {
