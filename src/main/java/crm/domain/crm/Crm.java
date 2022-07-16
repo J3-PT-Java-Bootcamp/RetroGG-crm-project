@@ -38,16 +38,16 @@ public class Crm {
 
   public void newLead(){
     System.out.println("Name: ");
-    String name = scanner.next();
+    String name = scanner.nextLine();
 
     System.out.println("Phone: ");
-    String phone = "";
+    String phone = scanner.nextLine();
 
     System.out.println("Email: ");
-    String email = "";
+    String email = scanner.nextLine();
 
     System.out.println("Company: ");
-    String company = "";
+    String company = scanner.nextLine();
 
     Lead oneLead = new Lead(name, phone, email, company);
     leadsList.add(oneLead);
