@@ -30,4 +30,24 @@ public class Company {
     public static Company create(Industry industry, int employeeCount, String city, String country) {
         return new Company(UUID.randomUUID(), industry, employeeCount, city,country, new ArrayList<Contact>(), new ArrayList<Opportunity>());
     }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public Industry getIndustry() {
+        return industry;
+    }
+
+    public int getEmployeeCount() {
+        return employeeCount;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
 }

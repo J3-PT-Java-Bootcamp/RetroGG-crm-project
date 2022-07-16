@@ -18,4 +18,16 @@ public class Contact {
     public static Contact fromLead(Lead lead) {
         return new Contact(UUID.randomUUID(), lead.getPhoneNumber(), lead.getName());
     }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

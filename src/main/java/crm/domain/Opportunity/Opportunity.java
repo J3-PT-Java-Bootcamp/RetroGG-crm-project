@@ -25,4 +25,23 @@ public class Opportunity {
         return new Opportunity(UUID.randomUUID(), decisionMaker, quantity, productType, OpportunityStatus.OPEN);
     }
 
+    public UUID getId() {
+        return id;
+    }
+
+    public Contact getDecisionMaker() {
+        return decisionMaker;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public ProductType getProductType() {
+        return productType;
+    }
+
+    public OpportunityStatus getStatus() {
+        return status;
+    }
 }
