@@ -13,7 +13,7 @@ public class Company {
     private String city;
     private String country;
     private ArrayList<Contact> contacts;
-    private ArrayList<Opportunity> oportunities;
+    private ArrayList<Opportunity> opportunities;
 
     private Company() {}
 
