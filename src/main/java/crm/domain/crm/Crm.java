@@ -9,13 +9,16 @@ import java.util.Scanner;
 
 public class Crm {
 
-  private ArrayList<Lead> leadsList;
+  private static ArrayList<Lead> leadsList;
   private ArrayList<Opportunity> opportunitiesList;
   private ArrayList<Company> companiesList;
 
-  Scanner scanner = new Scanner(System.in);
+  static Scanner scanner = new Scanner(System.in);
 
   public Crm() {
+    leadsList = new ArrayList<>();
+    opportunitiesList = new ArrayList<>();
+    companiesList = new ArrayList<>();
   }
 
   public Crm(ArrayList<Lead> leadsList, ArrayList<Opportunity> opportunitiesList, ArrayList<Company> companiesList) {
@@ -36,7 +39,7 @@ public class Crm {
     return companiesList;
   }
 
-  public void newLead(){
+  public static void newLead(){
     System.out.println("Name: ");
     String name = scanner.nextLine();
 
@@ -52,5 +55,12 @@ public class Crm {
     Lead oneLead = new Lead(name, phone, email, company);
     leadsList.add(oneLead);
   }
+
+  public static void newLead(Lead oneLead){
+    leadsList.add(oneLead);
+  }
+
+
+
 
 }
