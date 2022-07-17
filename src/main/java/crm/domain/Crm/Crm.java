@@ -26,37 +26,46 @@ public class Crm {
     String inputCommand;
     boolean exit = false;
     do {
-      System.out.print("Command: ");
+      this.printCommandRequest();
       inputCommand = scanner.nextLine().toLowerCase();
       Command command = Command.fromString(inputCommand);
         switch (command) {
-          case CREATE_LEAD -> createLead();
-          case HELP -> printHelp();
+          case CREATE_LEAD -> this.createLead();
+          case HELP -> this.printHelp();
           case EXIT -> exit = true;
-          default -> System.out.println("Unavailable command. Type --help to show available commands.");
+          default -> System.out.println("Unavailable command.");
         }
     } while (!exit);
-    printQuit();
+    this.printQuit();
+  }
+
+  private void printCommandRequest() {
+    System.out.println("Type " + Command.HELP.getCommand() +" to show the available commands.");
+    System.out.print("Command: ");
+  }
+
+  private void printWelcome() {
+    System.out.println("Welcome to the CRM. You can start managing your customers.");
   }
 
   private void printQuit() {
     System.out.println("Saving all changes...");
     System.out.println("CRM has been shut down");
   }
-
-  private void printWelcome() {
-    System.out.println("Welcome to the CRM. You can start managing your customers.");
-    System.out.println("Type " + Command.HELP.getCommand() +" to show the available commands.");
-  }
+  
   private void printHelp() {
     System.out.println("""
             Commands list
             ================================
+            \tcreate lead \t-\tStarts a create lead wizard.
             \tconvert <<lead-id>> \t-\tIf lead with id is found, convert lead to opportunity.
             """);
   }
 
   public void createLead(){
+    System.out.println("Lead creation wizard");
+    System.out.println("========================");
+
     System.out.println("Name: ");
     String name = scanner.nextLine();
 
@@ -70,6 +79,7 @@ public class Crm {
     String company = scanner.nextLine();
     var request = new CreateLeadRecord(name, phone, email, company);
     this.createLeadUseCase.run(request);
+    System.out.println("Lead created successfully!");
   }
 
 }
