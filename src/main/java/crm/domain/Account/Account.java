@@ -16,7 +16,8 @@ public class Account {
     private ArrayList<Contact> contacts;
     private ArrayList<Opportunity> opportunities;
 
-    private Account() {}
+    private Account() {
+    }
 
     private Account(UUID id, String name, Industry industry, int employeeCount, String city, String country, ArrayList<Contact> contacts, ArrayList<Opportunity> oportunities) {
         this.id = id;
@@ -30,7 +31,7 @@ public class Account {
     }
 
     public static Account create(String name, Industry industry, int employeeCount, String city, String country) {
-        return new Account(UUID.randomUUID(), name, industry, employeeCount, city,country, new ArrayList<Contact>(), new ArrayList<Opportunity>());
+        return new Account(UUID.randomUUID(), name, industry, employeeCount, city, country, new ArrayList<Contact>(), new ArrayList<Opportunity>());
     }
 
     public UUID getId() {

@@ -6,17 +6,17 @@ import org.junit.jupiter.api.Test;
 
 class CrmTest {
 
-  @BeforeEach
-  void setUp() {
+    @BeforeEach
+    void setUp() {
 
-  }
+    }
 
-  @AfterEach
-  void tearDown() {
-  }
+    @AfterEach
+    void tearDown() {
+    }
 
-  @Test
-  void test_newLead_receive_lead() {
+    @Test
+    void test_newLead_receive_lead() {
 //    Crm oneCrm = new Crm();
 //
 //    Lead otherLead = new Lead("elena", "9999", "elena@gmail.com", "GrandCompany");
@@ -24,5 +24,5 @@ class CrmTest {
 //
 //    assertEquals("elena", oneCrm.getLeadsList().get(0).getName());
 //    System.out.println(oneCrm.getLeadsList().get(0).getName());
-  }
+    }
 }

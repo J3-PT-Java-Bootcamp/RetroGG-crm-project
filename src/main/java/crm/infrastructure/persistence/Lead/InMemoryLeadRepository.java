@@ -1,13 +1,16 @@
 package crm.infrastructure.persistence.Lead;
 
-import crm.domain.Lead.LeadRepository;
 import crm.domain.Lead.Lead;
+import crm.domain.Lead.LeadRepository;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 public class InMemoryLeadRepository implements LeadRepository {
 
-    private final Map<Integer,Lead> leads;
+    private final Map<Integer, Lead> leads;
 
     public InMemoryLeadRepository() {
         this.leads = new HashMap<>();

@@ -11,7 +11,8 @@ public class Opportunity {
     private ProductType productType;
     private OpportunityStatus status;
 
-    private Opportunity() {}
+    private Opportunity() {
+    }
 
     private Opportunity(UUID id, Contact decisionMaker, int quantity, ProductType productType, OpportunityStatus status) {
         this.id = id;

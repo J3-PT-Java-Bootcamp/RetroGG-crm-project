@@ -3,7 +3,7 @@ package crm.application.Leads.ConvertLeadToOpportunity;
 import crm.domain.Account.Industry;
 import crm.domain.Opportunity.ProductType;
 
-public record ConvertLeadToOpportunityPayload(
+public record ConvertLeadToOpportunityRequest(
         Integer leadId,
         ProductType productType,
         Integer quantity,
@@ -11,4 +11,5 @@ public record ConvertLeadToOpportunityPayload(
         Integer numberOfEmployees,
         String companyCity,
         String companyCountry
-) {}
+) {
+}

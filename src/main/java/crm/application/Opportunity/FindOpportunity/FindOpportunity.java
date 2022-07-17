@@ -13,7 +13,7 @@ public class FindOpportunity {
 
     public Opportunity run(FindOpportunityRequest request) throws OpportunityNotFoundException {
         var opportunity = this.opportunityRepository.findById(request.id());
-        if(opportunity.isEmpty()) {
+        if (opportunity.isEmpty()) {
             throw new OpportunityNotFoundException(request.id());
         }
         return opportunity.get();

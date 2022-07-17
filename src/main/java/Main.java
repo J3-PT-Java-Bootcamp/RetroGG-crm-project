@@ -1,4 +1,4 @@
-import crm.domain.Crm.Crm;
+import crm.application.Crm.Crm;
 
 public class Main {
     public static void main(String[] args) {

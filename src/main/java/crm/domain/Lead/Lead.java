@@ -42,7 +42,7 @@ public class Lead {
     @Override
     public String toString() {
         return String.format("""
-                
+                                
                 %d - %s
                 """, this.id, this.name);
     }

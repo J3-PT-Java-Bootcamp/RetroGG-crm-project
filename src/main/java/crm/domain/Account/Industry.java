@@ -1,8 +1,5 @@
 package crm.domain.Account;
 
-import crm.domain.Opportunity.ProductType;
-import crm.domain.Opportunity.ProductTypeNotFoundException;
-
 public enum Industry {
     PRODUCE("produce"),
     ECOMMERCE("ecommerce"),
@@ -12,13 +9,11 @@ public enum Industry {
 
     private final String industry;
 
-    public String getIndustry()
-    {
+    public String getIndustry() {
         return this.industry;
     }
 
-    private Industry(String industry)
-    {
+    private Industry(String industry) {
         this.industry = industry;
     }
 

@@ -1,18 +1,19 @@
-package crm.domain.Crm;
+package crm.application.Crm;
 
-import crm.application.Leads.ConvertLeadToOpportunity.ConvertLeadToOpportunityPayload;
+import crm.application.Leads.ConvertLeadToOpportunity.ConvertLeadToOpportunityRequest;
 import crm.application.Leads.ConvertLeadToOpportunity.ConvertLeadToOpportunityUseCase;
-import crm.application.Leads.CreateLead.CreateLeadRecord;
+import crm.application.Leads.CreateLead.CreateLeadRequest;
 import crm.application.Leads.CreateLead.CreateLeadUseCase;
 import crm.application.Leads.FindAll.FindAllLeads;
 import crm.application.Opportunity.FindOpportunity.FindOpportunity;
 import crm.application.Opportunity.FindOpportunity.FindOpportunityRequest;
-import crm.domain.Opportunity.OpportunityNotFoundException;
 import crm.domain.Account.AccountRepository;
 import crm.domain.Account.Industry;
 import crm.domain.Account.IndustryNotFoundException;
-import crm.domain.Lead.LeadRepository;
+import crm.domain.Crm.Command;
 import crm.domain.Lead.LeadNotFoundException;
+import crm.domain.Lead.LeadRepository;
+import crm.domain.Opportunity.OpportunityNotFoundException;
 import crm.domain.Opportunity.OpportunityRepository;
 import crm.domain.Opportunity.ProductType;
 import crm.domain.Opportunity.ProductTypeNotFoundException;
@@ -103,7 +104,7 @@ public class Crm {
 
         System.out.println("Company: ");
         String company = scanner.nextLine();
-        var request = new CreateLeadRecord(name, phone, email, company);
+        var request = new CreateLeadRequest(name, phone, email, company);
         this.createLeadUseCase.run(request);
         System.out.println("Lead created successfully!");
     }
@@ -116,7 +117,7 @@ public class Crm {
         do {
             try {
                 System.out.println("Product interest?");
-                for (ProductType type: ProductType.values()) {
+                for (ProductType type : ProductType.values()) {
                     System.out.printf("\t%s%n", type);
                 }
                 String productTypeInput = scanner.nextLine();
@@ -133,7 +134,7 @@ public class Crm {
         do {
             try {
                 System.out.println("Industry?");
-                for (Industry type: Industry.values()) {
+                for (Industry type : Industry.values()) {
                     System.out.printf("\t%s%n", type);
                 }
                 String industryInput = scanner.nextLine();
@@ -151,7 +152,7 @@ public class Crm {
         System.out.println("Country?");
         String country = scanner.nextLine();
 
-        var request = new ConvertLeadToOpportunityPayload(leadId, productType, quantity, industry, numberOfEmployees, city, country);
+        var request = new ConvertLeadToOpportunityRequest(leadId, productType, quantity, industry, numberOfEmployees, city, country);
         try {
             this.convertLeadToOpportunity.run(request);
             System.out.println("Lead converted successfully.");
