@@ -1,16 +1,19 @@
 package crm.application.ConvertLeadToOpportunity;
 
 import crm.domain.Account.Account;
-import crm.domain.Lead.ILeadRepository;
+import crm.domain.Account.AccountRepository;
+import crm.domain.Lead.LeadRepository;
 import crm.domain.Lead.LeadNotFoundException;
 import crm.domain.Opportunity.Opportunity;
 
 public class ConvertLeadToOpportunityUseCase {
 
-    private final ILeadRepository leadRepository;
+    private final LeadRepository leadRepository;
+    private final AccountRepository accountRepository;
 
-    public ConvertLeadToOpportunityUseCase(ILeadRepository leadRepository) {
+    public ConvertLeadToOpportunityUseCase(LeadRepository leadRepository, AccountRepository accountRepository) {
         this.leadRepository = leadRepository;
+        this.accountRepository = accountRepository;
     }
 
     public void run(ConvertLeadToOpportunityPayload request) throws LeadNotFoundException {
@@ -31,7 +34,7 @@ public class ConvertLeadToOpportunityUseCase {
         );
         account.addContact(opportunity.getDecisionMaker());
         account.addOpportunity(opportunity);
-        // save account
+        this.accountRepository.save(account);
         this.leadRepository.remove(lead.get());
     }
 }

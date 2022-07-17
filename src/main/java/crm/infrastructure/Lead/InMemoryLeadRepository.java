@@ -1,13 +1,13 @@
 package crm.infrastructure.Lead;
 
-import crm.domain.Lead.ILeadRepository;
+import crm.domain.Lead.LeadRepository;
 import crm.domain.Lead.Lead;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class InMemoryLeadRepository implements ILeadRepository {
+public class InMemoryLeadRepository implements LeadRepository {
 
     private final Map<Integer,Lead> leads;
 

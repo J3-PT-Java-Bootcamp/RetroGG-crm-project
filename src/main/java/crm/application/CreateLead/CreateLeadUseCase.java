@@ -1,12 +1,12 @@
 package crm.application.CreateLead;
 
-import crm.domain.Lead.ILeadRepository;
+import crm.domain.Lead.LeadRepository;
 import crm.domain.Lead.Lead;
 
 public final class CreateLeadUseCase {
 
-    private final ILeadRepository leadRepository;
-    public CreateLeadUseCase(ILeadRepository leadRepository) {
+    private final LeadRepository leadRepository;
+    public CreateLeadUseCase(LeadRepository leadRepository) {
         this.leadRepository = leadRepository;
     }
 
