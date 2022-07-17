@@ -4,10 +4,7 @@ import crm.domain.Company.Company;
 import crm.domain.Lead.Lead;
 import crm.domain.Opportunity.Opportunity;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 public class Crm {
 
@@ -26,13 +23,45 @@ public class Crm {
   public Set<Lead> getLeadsList() {
     return leadsList;
   }
-
   public ArrayList<Opportunity> getOpportunitiesList() {
     return opportunitiesList;
   }
-
   public ArrayList<Company> getCompaniesList() {
     return companiesList;
+  }
+
+  public void start() {
+    this.printWelcome();
+    String inputCommand;
+    boolean exit = false;
+    do {
+      System.out.print("Command: ");
+      inputCommand = scanner.nextLine().toLowerCase();
+      Command command = Command.fromString(inputCommand);
+        switch (command) {
+          case HELP -> printHelp();
+          case EXIT -> exit = true;
+          default -> System.out.println("Unavailable command. Type --help to show available commands.");
+        }
+    } while (!exit);
+    printQuit();
+  }
+
+  private void printQuit() {
+    System.out.println("Saving all changes...");
+    System.out.println("CRM has been shut down");
+  }
+
+  private void printWelcome() {
+    System.out.println("Welcome to the CRM. You can start managing your customers.");
+    System.out.println("Type " + Command.HELP.getCommand() +" to show the available commands.");
+  }
+  private void printHelp() {
+    System.out.println("""
+            Commands list
+            ================================
+            \tconvert <<lead-id>> \t-\tIf lead with id is found, convert lead to opportunity.
+            """);
   }
 
   public void newLead(){
