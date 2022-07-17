@@ -13,7 +13,8 @@ public class Opportunity {
 
     private Opportunity() {}
 
-    public Opportunity(UUID id, Contact decisionMaker, int quantity, ProductType productType, OpportunityStatus status) {
+    private Opportunity(UUID id, Contact decisionMaker, int quantity, ProductType productType, OpportunityStatus status) {
+        this.id = id;
         this.decisionMaker = decisionMaker;
         this.quantity = quantity;
         this.productType = productType;

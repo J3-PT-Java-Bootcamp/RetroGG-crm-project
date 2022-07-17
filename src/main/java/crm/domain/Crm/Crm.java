@@ -83,7 +83,8 @@ public class Crm {
                 ================================
                 \tnew lead \t-\tStarts a create lead wizard.
                 \tshow leads \t-\tShow all leads.
-                \tconvert <<lead-id>> \t-\tIf lead with id is found, convert lead to opportunity.
+                \tlookup opportunity \t-\tShow opportunity if found.
+                \tconvert \t-\tIf lead with id is found, convert lead to opportunity.
                 """);
     }
 
