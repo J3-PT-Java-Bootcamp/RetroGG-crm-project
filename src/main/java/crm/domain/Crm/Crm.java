@@ -5,6 +5,9 @@ import crm.application.Leads.ConvertLeadToOpportunity.ConvertLeadToOpportunityUs
 import crm.application.Leads.CreateLead.CreateLeadRecord;
 import crm.application.Leads.CreateLead.CreateLeadUseCase;
 import crm.application.Leads.FindAll.FindAllLeads;
+import crm.application.Opportunity.FindOpportunity.FindOpportunity;
+import crm.application.Opportunity.FindOpportunity.FindOpportunityRequest;
+import crm.domain.Opportunity.OpportunityNotFoundException;
 import crm.domain.Account.AccountRepository;
 import crm.domain.Account.Industry;
 import crm.domain.Account.IndustryNotFoundException;
@@ -18,6 +21,7 @@ import crm.infrastructure.persistence.Lead.InMemoryLeadRepository;
 import crm.infrastructure.persistence.Opportunity.InMemoryOpportunityRepository;
 
 import java.util.Scanner;
+import java.util.UUID;
 
 public class Crm {
 
@@ -26,6 +30,7 @@ public class Crm {
     private final CreateLeadUseCase createLeadUseCase;
     private final ConvertLeadToOpportunityUseCase convertLeadToOpportunity;
     private final FindAllLeads findAllLeads;
+    private final FindOpportunity findOpportunity;
 
     public Crm() {
         LeadRepository leadsRepository = new InMemoryLeadRepository();
@@ -34,6 +39,7 @@ public class Crm {
         this.createLeadUseCase = new CreateLeadUseCase(leadsRepository);
         this.convertLeadToOpportunity = new ConvertLeadToOpportunityUseCase(leadsRepository, accountRepository, opportunityRepository);
         this.findAllLeads = new FindAllLeads(leadsRepository);
+        this.findOpportunity = new FindOpportunity(opportunityRepository);
     }
 
     public void start() {
@@ -48,6 +54,7 @@ public class Crm {
                 case CREATE_LEAD -> this.createLead();
                 case SHOW_LEADS -> this.showLeads();
                 case CONVERT -> this.convertLeadToOpportunity();
+                case OPPORTUNITY_LOOKUP -> this.showOpportunity();
                 case HELP -> this.printHelp();
                 case EXIT -> exit = true;
                 default -> System.out.println("Unavailable command.");
@@ -158,6 +165,18 @@ public class Crm {
                 ID - Name
                 """);
         System.out.println(leads);
+    }
+
+    private void showOpportunity() {
+        System.out.print("ID: ");
+        String idInput = scanner.nextLine();
+        UUID id = UUID.fromString(idInput);
+        try {
+            var opportunity = this.findOpportunity.run(new FindOpportunityRequest(id));
+            System.out.println(opportunity);
+        } catch (OpportunityNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 }

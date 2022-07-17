@@ -5,6 +5,7 @@ import crm.domain.Opportunity.OpportunityRepository;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 public class InMemoryOpportunityRepository implements OpportunityRepository {
@@ -18,5 +19,10 @@ public class InMemoryOpportunityRepository implements OpportunityRepository {
     @Override
     public void save(Opportunity opportunity) {
         this.opportunities.put(opportunity.getId(), opportunity);
+    }
+
+    @Override
+    public Optional<Opportunity> findById(UUID id) {
+        return Optional.ofNullable(this.opportunities.get(id));
     }
 }

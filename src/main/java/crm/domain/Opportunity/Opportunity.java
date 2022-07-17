@@ -44,4 +44,15 @@ public class Opportunity {
     public OpportunityStatus getStatus() {
         return status;
     }
+
+    @Override
+    public String toString() {
+        return "Opportunity{" +
+                "id=" + id +
+                ", decisionMaker=" + decisionMaker +
+                ", quantity=" + quantity +
+                ", productType=" + productType +
+                ", status=" + status +
+                '}';
+    }
 }

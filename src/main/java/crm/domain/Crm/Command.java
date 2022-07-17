@@ -4,6 +4,7 @@ public enum Command {
     CREATE_LEAD("new lead"),
     SHOW_LEADS("show leads"),
     CONVERT("convert"),
+    OPPORTUNITY_LOOKUP("lookup opportunity"),
     HELP("--help"),
     EXIT("exit"),
     INVALID("invalid"),
