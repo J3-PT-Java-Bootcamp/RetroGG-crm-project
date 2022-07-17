@@ -1,4 +1,4 @@
-package crm.application.CreateLead;
+package crm.application.Leads.CreateLead;
 
 public record CreateLeadRecord(
         String name,

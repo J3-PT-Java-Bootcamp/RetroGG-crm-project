@@ -3,9 +3,7 @@ package crm.infrastructure.Lead;
 import crm.domain.Lead.LeadRepository;
 import crm.domain.Lead.Lead;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class InMemoryLeadRepository implements LeadRepository {
 
@@ -28,6 +26,11 @@ public class InMemoryLeadRepository implements LeadRepository {
     @Override
     public void remove(Lead lead) {
         this.leads.remove(lead.getId());
+    }
+
+    @Override
+    public ArrayList<Lead> findAll() {
+        return new ArrayList<>(this.leads.values());
     }
 
 }

@@ -1,9 +1,10 @@
 package crm.domain.Crm;
 
-import crm.application.ConvertLeadToOpportunity.ConvertLeadToOpportunityPayload;
-import crm.application.ConvertLeadToOpportunity.ConvertLeadToOpportunityUseCase;
-import crm.application.CreateLead.CreateLeadRecord;
-import crm.application.CreateLead.CreateLeadUseCase;
+import crm.application.Leads.ConvertLeadToOpportunity.ConvertLeadToOpportunityPayload;
+import crm.application.Leads.ConvertLeadToOpportunity.ConvertLeadToOpportunityUseCase;
+import crm.application.Leads.CreateLead.CreateLeadRecord;
+import crm.application.Leads.CreateLead.CreateLeadUseCase;
+import crm.application.Leads.FindAll.FindAllLeads;
 import crm.domain.Account.AccountRepository;
 import crm.domain.Account.Industry;
 import crm.domain.Account.IndustryNotFoundException;
@@ -22,12 +23,14 @@ public class Crm {
 
     private final CreateLeadUseCase createLeadUseCase;
     private final ConvertLeadToOpportunityUseCase convertLeadToOpportunity;
+    private final FindAllLeads findAllLeads;
 
     public Crm() {
         LeadRepository leadsRepository = new InMemoryLeadRepository();
         AccountRepository accountRepository = new InMemoryAccountRepository();
         this.createLeadUseCase = new CreateLeadUseCase(leadsRepository);
         this.convertLeadToOpportunity = new ConvertLeadToOpportunityUseCase(leadsRepository, accountRepository);
+        this.findAllLeads = new FindAllLeads(leadsRepository);
     }
 
     public void start() {
@@ -40,6 +43,7 @@ public class Crm {
             Command command = Command.fromString(inputCommand);
             switch (command) {
                 case CREATE_LEAD -> this.createLead();
+                case SHOW_LEADS -> this.showLeads();
                 case CONVERT -> this.convertLeadToOpportunity();
                 case HELP -> this.printHelp();
                 case EXIT -> exit = true;
@@ -68,6 +72,7 @@ public class Crm {
                 Commands list
                 ================================
                 \tnew lead \t-\tStarts a create lead wizard.
+                \tshow leads \t-\tShow all leads.
                 \tconvert <<lead-id>> \t-\tIf lead with id is found, convert lead to opportunity.
                 """);
     }
@@ -142,6 +147,14 @@ public class Crm {
         } catch (LeadNotFoundException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    private void showLeads() {
+        var leads = this.findAllLeads.run();
+        System.out.println("""
+                ID - Name
+                """);
+        System.out.println(leads);
     }
 
 }

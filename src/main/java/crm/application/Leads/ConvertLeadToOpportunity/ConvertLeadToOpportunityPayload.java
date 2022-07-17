@@ -1,4 +1,4 @@
-package crm.application.ConvertLeadToOpportunity;
+package crm.application.Leads.ConvertLeadToOpportunity;
 
 import crm.domain.Account.Industry;
 import crm.domain.Opportunity.ProductType;

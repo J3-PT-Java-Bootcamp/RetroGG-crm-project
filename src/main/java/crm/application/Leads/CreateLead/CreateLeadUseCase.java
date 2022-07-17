@@ -1,4 +1,4 @@
-package crm.application.CreateLead;
+package crm.application.Leads.CreateLead;
 
 import crm.domain.Lead.LeadRepository;
 import crm.domain.Lead.Lead;
