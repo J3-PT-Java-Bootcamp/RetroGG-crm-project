@@ -5,7 +5,7 @@ import crm.domain.Lead.LeadRepository;
 
 import java.util.ArrayList;
 
-public class FindAllLeads {
+public final class FindAllLeads {
     private final LeadRepository leadRepository;
 
     public FindAllLeads(LeadRepository leadRepository) {

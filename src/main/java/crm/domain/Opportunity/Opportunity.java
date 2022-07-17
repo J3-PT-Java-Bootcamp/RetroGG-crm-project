@@ -16,6 +16,7 @@ public class Opportunity {
 
     private Opportunity(UUID id, Contact decisionMaker, int quantity, ProductType productType, OpportunityStatus status) {
         this.id = id;
+        System.out.println(this.id);
         this.decisionMaker = decisionMaker;
         this.quantity = quantity;
         this.productType = productType;
@@ -47,6 +48,9 @@ public class Opportunity {
         return status;
     }
 
+    public void closeLost() {
+        this.status = OpportunityStatus.CLOSED_LOST;
+    }
     @Override
     public String toString() {
         return "Opportunity{" +

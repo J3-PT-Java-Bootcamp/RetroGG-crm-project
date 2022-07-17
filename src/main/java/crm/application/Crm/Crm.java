@@ -5,8 +5,9 @@ import crm.application.Leads.ConvertLeadToOpportunity.ConvertLeadToOpportunityUs
 import crm.application.Leads.CreateLead.CreateLeadRequest;
 import crm.application.Leads.CreateLead.CreateLeadUseCase;
 import crm.application.Leads.FindAll.FindAllLeads;
+import crm.application.Opportunity.CloseLostOpportunity.CloseLostOpportunity;
 import crm.application.Opportunity.FindOpportunity.FindOpportunity;
-import crm.application.Opportunity.FindOpportunity.FindOpportunityRequest;
+import crm.application.Shared.UUIDRequest;
 import crm.domain.Account.AccountRepository;
 import crm.domain.Account.Industry;
 import crm.domain.Account.IndustryNotFoundException;
@@ -24,7 +25,7 @@ import crm.infrastructure.persistence.Opportunity.InMemoryOpportunityRepository;
 import java.util.Scanner;
 import java.util.UUID;
 
-public class Crm {
+public final class Crm {
 
     private final Scanner scanner = new Scanner(System.in);
 
@@ -32,6 +33,7 @@ public class Crm {
     private final ConvertLeadToOpportunityUseCase convertLeadToOpportunity;
     private final FindAllLeads findAllLeads;
     private final FindOpportunity findOpportunity;
+    private final CloseLostOpportunity closeLostOpportunity;
 
     public Crm() {
         LeadRepository leadsRepository = new InMemoryLeadRepository();
@@ -41,6 +43,7 @@ public class Crm {
         this.convertLeadToOpportunity = new ConvertLeadToOpportunityUseCase(leadsRepository, accountRepository, opportunityRepository);
         this.findAllLeads = new FindAllLeads(leadsRepository);
         this.findOpportunity = new FindOpportunity(opportunityRepository);
+        this.closeLostOpportunity = new CloseLostOpportunity(opportunityRepository, findOpportunity);
     }
 
     public void start() {
@@ -56,6 +59,7 @@ public class Crm {
                 case SHOW_LEADS -> this.showLeads();
                 case CONVERT -> this.convertLeadToOpportunity();
                 case OPPORTUNITY_LOOKUP -> this.showOpportunity();
+                case CLOSE_LOST -> this.closeLostOpportunity();
                 case HELP -> this.printHelp();
                 case EXIT -> exit = true;
                 default -> System.out.println("Unavailable command.");
@@ -84,8 +88,9 @@ public class Crm {
                 ================================
                 \tnew lead \t-\tStarts a create lead wizard.
                 \tshow leads \t-\tShow all leads.
-                \tlookup opportunity \t-\tShow opportunity if found.
                 \tconvert \t-\tIf lead with id is found, convert lead to opportunity.
+                \tlookup opportunity \t-\tShow opportunity if found.
+                \tclose-lost \t-\tClose lost opportunity.
                 """);
     }
 
@@ -174,8 +179,20 @@ public class Crm {
         String idInput = scanner.nextLine();
         UUID id = UUID.fromString(idInput);
         try {
-            var opportunity = this.findOpportunity.run(new FindOpportunityRequest(id));
+            var opportunity = this.findOpportunity.run(new UUIDRequest(id));
             System.out.println(opportunity);
+        } catch (OpportunityNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void closeLostOpportunity() {
+        System.out.print("ID: ");
+        String idInput = scanner.nextLine();
+        UUID id = UUID.fromString(idInput);
+        try {
+            this.closeLostOpportunity.run(new UUIDRequest(id));
+            System.out.printf("Opportunity with id: %s closed lost succesfully.%n", id);
         } catch (OpportunityNotFoundException e) {
             System.out.println(e.getMessage());
         }

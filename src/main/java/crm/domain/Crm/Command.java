@@ -5,6 +5,7 @@ public enum Command {
     SHOW_LEADS("show leads"),
     CONVERT("convert"),
     OPPORTUNITY_LOOKUP("lookup opportunity"),
+    CLOSE_LOST("close-lost"),
     HELP("--help"),
     EXIT("exit"),
     INVALID("invalid"),

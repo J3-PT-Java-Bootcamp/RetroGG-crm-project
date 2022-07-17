@@ -7,7 +7,7 @@ import crm.domain.Lead.LeadRepository;
 import crm.domain.Opportunity.Opportunity;
 import crm.domain.Opportunity.OpportunityRepository;
 
-public class ConvertLeadToOpportunityUseCase {
+public final class ConvertLeadToOpportunityUseCase {
 
     private final LeadRepository leadRepository;
     private final AccountRepository accountRepository;
