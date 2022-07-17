@@ -1,33 +1,29 @@
-package crm.domain.crm;
+package crm.domain.Crm;
 
 import crm.domain.Company.Company;
 import crm.domain.Lead.Lead;
 import crm.domain.Opportunity.Opportunity;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Crm {
 
-  private static ArrayList<Lead> leadsList;
-  private ArrayList<Opportunity> opportunitiesList;
-  private ArrayList<Company> companiesList;
+  private final Set<Lead> leadsList;
+  private final ArrayList<Opportunity> opportunitiesList;
+  private final ArrayList<Company> companiesList;
 
-  static Scanner scanner = new Scanner(System.in);
+  private final Scanner scanner = new Scanner(System.in);
 
   public Crm() {
-    leadsList = new ArrayList<>();
+    leadsList = new HashSet<>();
     opportunitiesList = new ArrayList<>();
     companiesList = new ArrayList<>();
   }
 
-  public Crm(ArrayList<Lead> leadsList, ArrayList<Opportunity> opportunitiesList, ArrayList<Company> companiesList) {
-    this.leadsList = leadsList;
-    this.opportunitiesList = opportunitiesList;
-    this.companiesList = companiesList;
-  }
-
-  public ArrayList<Lead> getLeadsList() {
+  public Set<Lead> getLeadsList() {
     return leadsList;
   }
 
@@ -39,7 +35,7 @@ public class Crm {
     return companiesList;
   }
 
-  public static void newLead(){
+  public void newLead(){
     System.out.println("Name: ");
     String name = scanner.nextLine();
 
@@ -56,11 +52,8 @@ public class Crm {
     leadsList.add(oneLead);
   }
 
-  public static void newLead(Lead oneLead){
+  public void newLead(Lead oneLead){
     leadsList.add(oneLead);
   }
-
-
-
 
 }

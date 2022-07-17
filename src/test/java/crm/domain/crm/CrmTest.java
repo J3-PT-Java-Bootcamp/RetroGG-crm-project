@@ -1,4 +1,4 @@
-package crm.domain.crm;
+package crm.domain.Crm;
 
 import crm.domain.Lead.Lead;
 import org.junit.jupiter.api.AfterEach;
