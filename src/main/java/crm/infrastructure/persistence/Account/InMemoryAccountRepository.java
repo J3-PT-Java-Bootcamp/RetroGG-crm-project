@@ -1,4 +1,4 @@
-package crm.infrastructure.Lead;
+package crm.infrastructure.persistence.Account;
 
 import crm.domain.Account.Account;
 import crm.domain.Account.AccountRepository;

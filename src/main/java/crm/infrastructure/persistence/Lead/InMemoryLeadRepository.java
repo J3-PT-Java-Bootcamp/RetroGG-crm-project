@@ -1,4 +1,4 @@
-package crm.infrastructure.Lead;
+package crm.infrastructure.persistence.Lead;
 
 import crm.domain.Lead.LeadRepository;
 import crm.domain.Lead.Lead;

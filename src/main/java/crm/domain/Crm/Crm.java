@@ -10,10 +10,12 @@ import crm.domain.Account.Industry;
 import crm.domain.Account.IndustryNotFoundException;
 import crm.domain.Lead.LeadRepository;
 import crm.domain.Lead.LeadNotFoundException;
+import crm.domain.Opportunity.OpportunityRepository;
 import crm.domain.Opportunity.ProductType;
 import crm.domain.Opportunity.ProductTypeNotFoundException;
-import crm.infrastructure.Lead.InMemoryAccountRepository;
-import crm.infrastructure.Lead.InMemoryLeadRepository;
+import crm.infrastructure.persistence.Account.InMemoryAccountRepository;
+import crm.infrastructure.persistence.Lead.InMemoryLeadRepository;
+import crm.infrastructure.persistence.Opportunity.InMemoryOpportunityRepository;
 
 import java.util.Scanner;
 
@@ -28,8 +30,9 @@ public class Crm {
     public Crm() {
         LeadRepository leadsRepository = new InMemoryLeadRepository();
         AccountRepository accountRepository = new InMemoryAccountRepository();
+        OpportunityRepository opportunityRepository = new InMemoryOpportunityRepository();
         this.createLeadUseCase = new CreateLeadUseCase(leadsRepository);
-        this.convertLeadToOpportunity = new ConvertLeadToOpportunityUseCase(leadsRepository, accountRepository);
+        this.convertLeadToOpportunity = new ConvertLeadToOpportunityUseCase(leadsRepository, accountRepository, opportunityRepository);
         this.findAllLeads = new FindAllLeads(leadsRepository);
     }
 
