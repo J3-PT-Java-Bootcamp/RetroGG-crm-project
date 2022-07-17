@@ -6,4 +6,5 @@ import java.util.UUID;
 public interface ILeadRepository {
     void save(Lead lead);
     Optional<Lead> findById(Integer id);
+    void remove(Lead lead);
 }

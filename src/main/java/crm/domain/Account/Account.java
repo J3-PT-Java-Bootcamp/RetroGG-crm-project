@@ -1,4 +1,4 @@
-package crm.domain.Company;
+package crm.domain.Account;
 
 import crm.domain.Opportunity.Contact;
 import crm.domain.Opportunity.Opportunity;
@@ -6,8 +6,9 @@ import crm.domain.Opportunity.Opportunity;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class Company {
+public class Account {
     private UUID id;
+    private String name;
     private Industry industry;
     private int employeeCount;
     private String city;
@@ -15,10 +16,11 @@ public class Company {
     private ArrayList<Contact> contacts;
     private ArrayList<Opportunity> opportunities;
 
-    private Company() {}
+    private Account() {}
 
-    private Company(UUID id, Industry industry, int employeeCount, String city, String country, ArrayList<Contact> contacts, ArrayList<Opportunity> oportunities) {
+    private Account(UUID id, String name, Industry industry, int employeeCount, String city, String country, ArrayList<Contact> contacts, ArrayList<Opportunity> oportunities) {
         this.id = id;
+        this.name = name;
         this.industry = industry;
         this.employeeCount = employeeCount;
         this.city = city;
@@ -27,8 +29,8 @@ public class Company {
         this.opportunities = oportunities;
     }
 
-    public static Company create(Industry industry, int employeeCount, String city, String country) {
-        return new Company(UUID.randomUUID(), industry, employeeCount, city,country, new ArrayList<Contact>(), new ArrayList<Opportunity>());
+    public static Account create(String name, Industry industry, int employeeCount, String city, String country) {
+        return new Account(UUID.randomUUID(), name, industry, employeeCount, city,country, new ArrayList<Contact>(), new ArrayList<Opportunity>());
     }
 
     public UUID getId() {
@@ -49,5 +51,13 @@ public class Company {
 
     public String getCountry() {
         return country;
+    }
+
+    public void addContact(Contact contact) {
+        this.contacts.add(contact);
+    }
+
+    public void addOpportunity(Opportunity opportunity) {
+        this.opportunities.add(opportunity);
     }
 }

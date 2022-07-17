@@ -24,4 +24,10 @@ public class InMemoryLeadRepository implements ILeadRepository {
     public Optional<Lead> findById(Integer id) {
         return Optional.ofNullable(this.leads.get(id));
     }
+
+    @Override
+    public void remove(Lead lead) {
+        this.leads.remove(lead.getId());
+    }
+
 }
