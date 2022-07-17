@@ -51,6 +51,10 @@ public class Opportunity {
     public void closeLost() {
         this.status = OpportunityStatus.CLOSED_LOST;
     }
+
+    public void closeWon() {
+        this.status = OpportunityStatus.CLOSED_WON;
+    }
     @Override
     public String toString() {
         return "Opportunity{" +
@@ -61,4 +65,6 @@ public class Opportunity {
                 ", status=" + status +
                 '}';
     }
+
+
 }

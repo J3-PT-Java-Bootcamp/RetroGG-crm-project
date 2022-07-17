@@ -6,6 +6,7 @@ import crm.application.Leads.CreateLead.CreateLeadRequest;
 import crm.application.Leads.CreateLead.CreateLeadUseCase;
 import crm.application.Leads.FindAll.FindAllLeads;
 import crm.application.Opportunity.CloseLostOpportunity.CloseLostOpportunity;
+import crm.application.Opportunity.CloseWonOpportunity.CloseWonOpportunity;
 import crm.application.Opportunity.FindOpportunity.FindOpportunity;
 import crm.application.Shared.UUIDRequest;
 import crm.domain.Account.AccountRepository;
@@ -34,6 +35,7 @@ public final class Crm {
     private final FindAllLeads findAllLeads;
     private final FindOpportunity findOpportunity;
     private final CloseLostOpportunity closeLostOpportunity;
+    private final CloseWonOpportunity closeWonOpportunity;
 
     public Crm() {
         LeadRepository leadsRepository = new InMemoryLeadRepository();
@@ -44,6 +46,7 @@ public final class Crm {
         this.findAllLeads = new FindAllLeads(leadsRepository);
         this.findOpportunity = new FindOpportunity(opportunityRepository);
         this.closeLostOpportunity = new CloseLostOpportunity(opportunityRepository, findOpportunity);
+        this.closeWonOpportunity = new CloseWonOpportunity(opportunityRepository, findOpportunity);
     }
 
     public void start() {
@@ -60,6 +63,7 @@ public final class Crm {
                 case CONVERT -> this.convertLeadToOpportunity();
                 case OPPORTUNITY_LOOKUP -> this.showOpportunity();
                 case CLOSE_LOST -> this.closeLostOpportunity();
+                case CLOSE_WON -> this.closeWonOpportunity();
                 case HELP -> this.printHelp();
                 case EXIT -> exit = true;
                 default -> System.out.println("Unavailable command.");
@@ -198,4 +202,15 @@ public final class Crm {
         }
     }
 
+    private void closeWonOpportunity() {
+        System.out.print("ID: ");
+        String idInput = scanner.nextLine();
+        UUID id = UUID.fromString(idInput);
+        try {
+            this.closeWonOpportunity.run(new UUIDRequest(id));
+            System.out.printf("Opportunity with id: %s closed won succesfully.%n", id);
+        } catch (OpportunityNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

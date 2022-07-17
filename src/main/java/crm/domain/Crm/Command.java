@@ -6,6 +6,7 @@ public enum Command {
     CONVERT("convert"),
     OPPORTUNITY_LOOKUP("lookup opportunity"),
     CLOSE_LOST("close-lost"),
+    CLOSE_WON("close-won"),
     HELP("--help"),
     EXIT("exit"),
     INVALID("invalid"),
