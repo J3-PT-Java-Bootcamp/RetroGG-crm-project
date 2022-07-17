@@ -1,7 +1,7 @@
 package crm.domain.Crm;
 
 public enum Command {
-
+    CREATE_LEAD("create lead"),
     HELP("--help"),
     EXIT("exit"),
     INVALID("invalid"),

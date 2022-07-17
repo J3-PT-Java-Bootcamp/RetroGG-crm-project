@@ -1,33 +1,24 @@
 package crm.domain.Crm;
 
+import crm.application.CreateLead.CreateLeadRecord;
+import crm.application.CreateLead.CreateLeadUseCase;
 import crm.domain.Company.Company;
+import crm.domain.Lead.ILeadRepository;
 import crm.domain.Lead.Lead;
 import crm.domain.Opportunity.Opportunity;
+import crm.infrastructure.Lead.InMemoryLeadRepository;
 
 import java.util.*;
 
 public class Crm {
 
-  private final Set<Lead> leadsList;
-  private final ArrayList<Opportunity> opportunitiesList;
-  private final ArrayList<Company> companiesList;
-
   private final Scanner scanner = new Scanner(System.in);
 
-  public Crm() {
-    leadsList = new HashSet<>();
-    opportunitiesList = new ArrayList<>();
-    companiesList = new ArrayList<>();
-  }
+  private final CreateLeadUseCase createLeadUseCase;
 
-  public Set<Lead> getLeadsList() {
-    return leadsList;
-  }
-  public ArrayList<Opportunity> getOpportunitiesList() {
-    return opportunitiesList;
-  }
-  public ArrayList<Company> getCompaniesList() {
-    return companiesList;
+  public Crm() {
+    ILeadRepository leadsRepository = new InMemoryLeadRepository();
+    this.createLeadUseCase = new CreateLeadUseCase(leadsRepository);
   }
 
   public void start() {
@@ -39,6 +30,7 @@ public class Crm {
       inputCommand = scanner.nextLine().toLowerCase();
       Command command = Command.fromString(inputCommand);
         switch (command) {
+          case CREATE_LEAD -> createLead();
           case HELP -> printHelp();
           case EXIT -> exit = true;
           default -> System.out.println("Unavailable command. Type --help to show available commands.");
@@ -64,7 +56,7 @@ public class Crm {
             """);
   }
 
-  public void newLead(){
+  public void createLead(){
     System.out.println("Name: ");
     String name = scanner.nextLine();
 
@@ -76,13 +68,8 @@ public class Crm {
 
     System.out.println("Company: ");
     String company = scanner.nextLine();
-
-    Lead oneLead = new Lead(name, phone, email, company);
-    leadsList.add(oneLead);
-  }
-
-  public void newLead(Lead oneLead){
-    leadsList.add(oneLead);
+    var request = new CreateLeadRecord(name, phone, email, company);
+    this.createLeadUseCase.run(request);
   }
 
 }
