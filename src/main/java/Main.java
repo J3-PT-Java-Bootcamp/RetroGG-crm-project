@@ -1,5 +1,7 @@
+import crm.application.Crm.Crm;
+
 public class Main {
-  public static void main(String[] args) {
-    System.out.println("Hello Project 2!");
-  }
+    public static void main(String[] args) {
+        new Crm().start();
+    }
 }

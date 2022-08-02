@@ -11,9 +11,12 @@ public class Opportunity {
     private ProductType productType;
     private OpportunityStatus status;
 
-    private Opportunity() {}
+    private Opportunity() {
+    }
 
-    public Opportunity(UUID id, Contact decisionMaker, int quantity, ProductType productType, OpportunityStatus status) {
+    private Opportunity(UUID id, Contact decisionMaker, int quantity, ProductType productType, OpportunityStatus status) {
+        this.id = id;
+        System.out.println(this.id);
         this.decisionMaker = decisionMaker;
         this.quantity = quantity;
         this.productType = productType;
@@ -44,4 +47,24 @@ public class Opportunity {
     public OpportunityStatus getStatus() {
         return status;
     }
+
+    public void closeLost() {
+        this.status = OpportunityStatus.CLOSED_LOST;
+    }
+
+    public void closeWon() {
+        this.status = OpportunityStatus.CLOSED_WON;
+    }
+    @Override
+    public String toString() {
+        return "Opportunity{" +
+                "id=" + id +
+                ", decisionMaker=" + decisionMaker +
+                ", quantity=" + quantity +
+                ", productType=" + productType +
+                ", status=" + status +
+                '}';
+    }
+
+
 }
