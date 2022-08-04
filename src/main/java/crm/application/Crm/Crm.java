@@ -131,6 +131,7 @@ public final class Crm {
                 for (ProductType type : ProductType.values()) {
                     System.out.printf("\t%s%n", type);
                 }
+                scanner.nextLine();
                 String productTypeInput = scanner.nextLine();
                 productType = ProductType.fromString(productTypeInput);
             } catch (ProductTypeNotFoundException e) {
