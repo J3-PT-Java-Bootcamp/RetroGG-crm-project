@@ -149,6 +149,7 @@ public final class Crm {
                 for (Industry type : Industry.values()) {
                     System.out.printf("\t%s%n", type);
                 }
+                scanner.nextLine();
                 String industryInput = scanner.nextLine();
                 industry = Industry.fromString(industryInput);
             } catch (IndustryNotFoundException e) {
