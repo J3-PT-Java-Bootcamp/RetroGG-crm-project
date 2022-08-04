@@ -22,18 +22,17 @@ public class InMemoryLeadRepository implements LeadRepository {
     }
 
     @Override
-    public Optional<Lead> findById(Integer id) {
-        return Optional.ofNullable(this.leads.get(id));
+    public void remove(Lead lead) {
+        this.leads.remove(lead.getId());
     }
 
     @Override
-    public void remove(Lead lead) {
-        this.leads.remove(lead.getId());
+    public Optional<Lead> findById(Integer id) {
+        return Optional.ofNullable(this.leads.get(id));
     }
 
     @Override
     public ArrayList<Lead> findAll() {
         return new ArrayList<>(this.leads.values());
     }
-
 }

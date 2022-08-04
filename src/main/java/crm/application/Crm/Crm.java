@@ -95,6 +95,7 @@ public final class Crm {
                 \tconvert \t-\tIf lead with id is found, convert lead to opportunity.
                 \tlookup opportunity \t-\tShow opportunity if found.
                 \tclose-lost \t-\tClose lost opportunity.
+                \tclose-won \t-\tClose won opportunity.
                 """);
     }
 
@@ -123,7 +124,8 @@ public final class Crm {
         System.out.print("ID: ");
         int leadId = scanner.nextInt();
         ProductType productType = null;
-        do {
+
+        while (productType == null) {
             try {
                 System.out.println("Product interest?");
                 for (ProductType type : ProductType.values()) {
@@ -134,7 +136,7 @@ public final class Crm {
             } catch (ProductTypeNotFoundException e) {
                 System.out.println(e.getMessage());
             }
-        } while (productType == null);
+        }
 
         System.out.println("Which quantity?");
         int quantity = scanner.nextInt();
