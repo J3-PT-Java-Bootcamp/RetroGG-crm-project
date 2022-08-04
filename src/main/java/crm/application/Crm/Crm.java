@@ -31,7 +31,7 @@ public final class Crm {
     private final Scanner scanner = new Scanner(System.in);
 
     private final CreateLeadUseCase createLeadUseCase;
-    private final ConvertLeadToOpportunityUseCase convertLeadToOpportunity;
+    private final ConvertLeadToOpportunityUseCase convertLeadToOpportunityUseCase;
     private final FindAllLeads findAllLeads;
     private final FindOpportunity findOpportunity;
     private final CloseLostOpportunity closeLostOpportunity;
@@ -42,7 +42,7 @@ public final class Crm {
         AccountRepository accountRepository = new InMemoryAccountRepository();
         OpportunityRepository opportunityRepository = new InMemoryOpportunityRepository();
         this.createLeadUseCase = new CreateLeadUseCase(leadsRepository);
-        this.convertLeadToOpportunity = new ConvertLeadToOpportunityUseCase(leadsRepository, accountRepository, opportunityRepository);
+        this.convertLeadToOpportunityUseCase = new ConvertLeadToOpportunityUseCase(leadsRepository, accountRepository, opportunityRepository);
         this.findAllLeads = new FindAllLeads(leadsRepository);
         this.findOpportunity = new FindOpportunity(opportunityRepository);
         this.closeLostOpportunity = new CloseLostOpportunity(opportunityRepository, findOpportunity);
@@ -165,7 +165,7 @@ public final class Crm {
 
         var request = new ConvertLeadToOpportunityRequest(leadId, productType, quantity, industry, numberOfEmployees, city, country);
         try {
-            this.convertLeadToOpportunity.run(request);
+            this.convertLeadToOpportunityUseCase.run(request);
             System.out.println("Lead converted successfully.");
         } catch (LeadNotFoundException e) {
             System.out.println(e.getMessage());
