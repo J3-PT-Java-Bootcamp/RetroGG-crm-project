@@ -25,4 +25,8 @@ public class InMemoryOpportunityRepository implements OpportunityRepository {
     public Optional<Opportunity> findById(UUID id) {
         return Optional.ofNullable(this.opportunities.get(id));
     }
+
+    public Map<UUID, Opportunity> getOpportunities() {
+        return opportunities;
+    }
 }

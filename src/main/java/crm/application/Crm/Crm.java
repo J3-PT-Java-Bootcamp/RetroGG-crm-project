@@ -37,10 +37,13 @@ public final class Crm {
     private final CloseLostOpportunity closeLostOpportunity;
     private final CloseWonOpportunity closeWonOpportunity;
 
+    private final OpportunityRepository opportunityRepository;
+    private final LeadRepository leadsRepository;
+    private final AccountRepository accountRepository;
     public Crm() {
-        LeadRepository leadsRepository = new InMemoryLeadRepository();
-        AccountRepository accountRepository = new InMemoryAccountRepository();
-        OpportunityRepository opportunityRepository = new InMemoryOpportunityRepository();
+        this.leadsRepository = new InMemoryLeadRepository();
+        this.accountRepository = new InMemoryAccountRepository();
+        this.opportunityRepository = new InMemoryOpportunityRepository();
         this.createLeadUseCase = new CreateLeadUseCase(leadsRepository);
         this.convertLeadToOpportunityUseCase = new ConvertLeadToOpportunityUseCase(leadsRepository, accountRepository, opportunityRepository);
         this.findAllLeads = new FindAllLeads(leadsRepository);
@@ -218,5 +221,17 @@ public final class Crm {
         } catch (OpportunityNotFoundException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public ConvertLeadToOpportunityUseCase getConvertLeadToOpportunityUseCase() {
+        return convertLeadToOpportunityUseCase;
+    }
+
+    public OpportunityRepository getOpportunityRepository() {
+        return opportunityRepository;
+    }
+
+    public LeadRepository getLeadsRepository() {
+        return leadsRepository;
     }
 }
