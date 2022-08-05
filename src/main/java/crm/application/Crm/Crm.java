@@ -122,7 +122,7 @@ public final class Crm {
     private void convertLeadToOpportunity() {
         System.out.println("Which lead do you want to convert?");
         System.out.print("ID: ");
-        int leadId = scanner.nextInt();
+        int leadId = Integer.parseInt(scanner.nextLine());
         ProductType productType = null;
 
         while (productType == null) {
@@ -131,7 +131,6 @@ public final class Crm {
                 for (ProductType type : ProductType.values()) {
                     System.out.printf("\t%s%n", type);
                 }
-                scanner.nextLine();
                 String productTypeInput = scanner.nextLine();
                 productType = ProductType.fromString(productTypeInput);
             } catch (ProductTypeNotFoundException e) {
@@ -140,7 +139,7 @@ public final class Crm {
         }
 
         System.out.println("Which quantity?");
-        int quantity = scanner.nextInt();
+        int quantity = Integer.parseInt(scanner.nextLine());
 
         Industry industry = null;
         do {
@@ -149,7 +148,6 @@ public final class Crm {
                 for (Industry type : Industry.values()) {
                     System.out.printf("\t%s%n", type);
                 }
-                scanner.nextLine();
                 String industryInput = scanner.nextLine();
                 industry = Industry.fromString(industryInput);
             } catch (IndustryNotFoundException e) {
@@ -158,7 +156,7 @@ public final class Crm {
         } while (industry == null);
 
         System.out.println("Number of employees?");
-        int numberOfEmployees = scanner.nextInt();
+        int numberOfEmployees = Integer.parseInt(scanner.nextLine());
 
         System.out.println("City?");
         String city = scanner.nextLine();
@@ -187,7 +185,7 @@ public final class Crm {
         String idInput = scanner.nextLine();
         UUID id = UUID.fromString(idInput);
         try {
-            var opportunity = this.findOpportunity.run(new UUIDRequest(id));
+            var opportunity = this.findOpportunity.run(id);
             System.out.println(opportunity);
         } catch (OpportunityNotFoundException e) {
             System.out.println(e.getMessage());
@@ -198,9 +196,11 @@ public final class Crm {
         System.out.print("ID: ");
         String idInput = scanner.nextLine();
         UUID id = UUID.fromString(idInput);
+        System.out.print("Closing opportunity as LOST, please add a note: ");
+        String note = scanner.nextLine();
         try {
-            this.closeLostOpportunity.run(new UUIDRequest(id));
-            System.out.printf("Opportunity with id: %s closed lost succesfully.%n", id);
+            this.closeLostOpportunity.run(new UUIDRequest(id, note));
+            System.out.printf("Opportunity with id: %s closed lost successfully.%n", id);
         } catch (OpportunityNotFoundException e) {
             System.out.println(e.getMessage());
         }
@@ -210,9 +210,11 @@ public final class Crm {
         System.out.print("ID: ");
         String idInput = scanner.nextLine();
         UUID id = UUID.fromString(idInput);
+        System.out.print("Closing opportunity as WON, please add a note: ");
+        String note = scanner.nextLine();
         try {
-            this.closeWonOpportunity.run(new UUIDRequest(id));
-            System.out.printf("Opportunity with id: %s closed won succesfully.%n", id);
+            this.closeWonOpportunity.run(new UUIDRequest(id, note));
+            System.out.printf("Opportunity with id: %s closed won successfully.%n", id);
         } catch (OpportunityNotFoundException e) {
             System.out.println(e.getMessage());
         }

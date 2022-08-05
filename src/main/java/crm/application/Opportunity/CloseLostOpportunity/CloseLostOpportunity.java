@@ -16,8 +16,9 @@ public final class CloseLostOpportunity {
     }
 
     public void run(UUIDRequest request) throws OpportunityNotFoundException {
-        var opportunity = this.findOpportunity.run(request);
+        var opportunity = this.findOpportunity.run(request.id());
         opportunity.closeLost();
+        opportunity.addNote(request.note());
         this.opportunityRepository.save(opportunity);
     }
 }
