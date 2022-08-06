@@ -238,4 +238,8 @@ public final class Crm {
     public LeadRepository getLeadsRepository() {
         return leadsRepository;
     }
+
+    public FindOpportunity getFindOpportunity() {
+        return findOpportunity;
+    }
 }
