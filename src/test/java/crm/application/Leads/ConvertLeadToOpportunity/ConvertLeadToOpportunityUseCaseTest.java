@@ -22,6 +22,7 @@ class ConvertLeadToOpportunityUseCaseTest {
     @BeforeEach
     void setup(){
         crm = new Crm();
+        crm.getLeadsRepository().findAll().clear();
         l1 = new Lead("Luis", "666444222", "a@a.com",
                 "Maderas Alfonso");
         crm.getLeadsRepository().save(l1);

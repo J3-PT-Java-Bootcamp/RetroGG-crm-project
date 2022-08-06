@@ -227,6 +227,10 @@ public final class Crm {
         return convertLeadToOpportunityUseCase;
     }
 
+    public CreateLeadUseCase getCreateLeadUseCase() {
+        return createLeadUseCase;
+    }
+
     public OpportunityRepository getOpportunityRepository() {
         return opportunityRepository;
     }
