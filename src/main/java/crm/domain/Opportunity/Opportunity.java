@@ -19,9 +19,8 @@ public class Opportunity {
     private Opportunity() {
     }
 
-    private Opportunity(UUID id, Contact decisionMaker, int quantity, ProductType productType, OpportunityStatus status) {
+    public Opportunity(UUID id, Contact decisionMaker, int quantity, ProductType productType, OpportunityStatus status) {
         this.id = id;
-        System.out.println(this.id);
         this.decisionMaker = decisionMaker;
         this.quantity = quantity;
         this.productType = productType;
