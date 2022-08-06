@@ -9,7 +9,7 @@ public class Contact {
     private String phoneNumber;
     private String name;
 
-    private Contact(UUID id, String phoneNumber, String name) {
+    public Contact(UUID id, String phoneNumber, String name) {
         this.id = id;
         this.phoneNumber = phoneNumber;
         this.name = name;
