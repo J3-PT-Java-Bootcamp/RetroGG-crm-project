@@ -21,6 +21,7 @@ public class Opportunity {
 
     public Opportunity(UUID id, Contact decisionMaker, int quantity, ProductType productType, OpportunityStatus status) {
         this.id = id;
+        System.out.println(id);
         this.decisionMaker = decisionMaker;
         this.quantity = quantity;
         this.productType = productType;
