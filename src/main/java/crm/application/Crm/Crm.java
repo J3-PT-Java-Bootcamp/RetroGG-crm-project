@@ -40,6 +40,7 @@ public final class Crm {
     private final OpportunityRepository opportunityRepository;
     private final LeadRepository leadsRepository;
     private final AccountRepository accountRepository;
+
     public Crm() {
         this.leadsRepository = new InMemoryLeadRepository();
         this.accountRepository = new InMemoryAccountRepository();
