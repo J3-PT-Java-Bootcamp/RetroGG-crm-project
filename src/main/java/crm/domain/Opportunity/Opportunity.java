@@ -63,8 +63,9 @@ public class Opportunity {
 
     public void addNote(String note) {
         this.note = note;
-        this.notes.add(LocalDateTime.now().toString().substring(0,19)+ "   " + note+",");
+        this.notes.add(LocalDateTime.now().toString().substring(0, 19) + "   " + note + ",");
     }
+
     @Override
     public String toString() {
         return "OPPORTUNITY{" +
